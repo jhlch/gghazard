@@ -109,10 +109,10 @@ fortify.cox.zph <- function(x, df=4, nsmo=40) {
 #'
 #' gg_cox_zph(fortify(cox.zph(vfit)))
 gg_cox_zph <- function(x,
-                       resid_col="black", resid_shp=1,
+                       resid_col="black", resid_shp=1,  resid_alpha=1,
                        pred_col="black", pred_minmax_col=pred_col,
                        pred_minmax_linetype="dashed",
-                       ribbon_col=pred_col, ribbon_alpha=0.25) {
+                       ribbon_col=pred_col, ribbon_alpha=0.25 {
 
   lapply(x, function(czplot) {
 
@@ -123,7 +123,7 @@ gg_cox_zph <- function(x,
                            linetype=pred_minmax_linetype, alpha=0.25)
     gg <- gg + geom_line(data=czplot$pred, aes(x, y), color=pred_col)
     gg <- gg + geom_point(data=czplot$resid, aes(x, y),
-                          color=resid_col, shape=resid_shp)
+                          color=resid_col, shape=resid_shp, alpha=resid_alpha)
     if (czplot$log) gg <- gg + scale_x_log10()
     gg <- gg + labs(x="Time", y=czplot$ylab)
     gg <- gg + theme_bw()
